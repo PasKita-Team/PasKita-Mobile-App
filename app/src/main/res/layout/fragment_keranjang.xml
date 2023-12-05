@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.bottomnavigation.KeranjangFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/tulisan_paskita" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/ivPesan"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@string/chat"
+                android:src="@drawable/pesan" />
+
+            <ImageView
+                android:id="@+id/ivNotif"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="@string/chat"
+                android:src="@drawable/notifikasi" />
+
+        </LinearLayout>
+
+    </Toolbar>
+
+</LinearLayout>
