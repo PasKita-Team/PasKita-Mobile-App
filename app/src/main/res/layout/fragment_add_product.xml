@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Nama  "
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <EditText
@@ -62,32 +62,35 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Deskripsi Product : "
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <EditText
             android:layout_width="match_parent"
+            android:inputType="text"
             android:layout_height="100dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Kategori  "
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <EditText
             android:layout_width="match_parent"
+            android:inputType="text"
             android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Harga Produk  "
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <EditText
+            android:inputType="numberDecimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -95,10 +98,11 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Daerah  "
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <EditText
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -106,10 +110,11 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Layanan Pengiriman Tersedia : "
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <EditText
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -124,7 +129,7 @@
             android:layout_height="18dp"
             android:layout_marginLeft="162dp"
             android:text="Generate Foto"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -138,10 +143,11 @@
             android:layout_height="20dp"
             android:layout_marginTop="10dp"
             android:text="Caption Produk"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <EditText
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 
@@ -149,10 +155,11 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Instagram "
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <EditText
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -164,6 +171,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -175,6 +183,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
