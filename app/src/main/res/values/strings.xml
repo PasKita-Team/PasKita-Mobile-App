@@ -36,4 +36,5 @@
     <string name="selamat_datang">Halo, Selamat Datang. Sebelum Mulai Berbelanja Silahkan Siapkan Akun Anda Terlebih Dahulu</string>
     <string name="belum_punya_akun">Belum Punya Akun? Daftar Sekarang</string>
     <string name="sudah_punya_akun">Sudah Punya Akun? Login Sekarang</string>
+    <string name="produk">produk</string>
 </resources>
