@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ListItemKeranjangBinding
@@ -39,6 +41,7 @@ class KeranjangProdukAdapter(private val context: KeranjangActivity) : ListAdapt
     class MyViewHolder(private val binding: ListItemKeranjangBinding)
         : RecyclerView.ViewHolder(binding.root) {
         private val db = FirebaseFirestore.getInstance()
+        private val auth = Firebase.auth
         fun bind(produk: Produk, context: KeranjangActivity) {
 
             val viewModel = ViewModelProvider(context)[KeranjangViewModel::class.java]
@@ -103,36 +106,20 @@ class KeranjangProdukAdapter(private val context: KeranjangActivity) : ListAdapt
             }
 
             binding.ivHapus.setOnClickListener {
-
                 val builder = AlertDialog.Builder(itemView.context)
                 builder.setTitle("Konfirmasi")
-                builder.setMessage("Yakin Ingin Menhapus Produk Ini Dari Keranjang?")
+                builder.setMessage("Yakin Ingin Menghapus Produk Ini Dari Keranjang?")
                 builder.setPositiveButton("Ya") { _, _ ->
-                    val produkDocument = db.collection("produk").document(produk.id_produk.toString())
-                    produkDocument.get().addOnSuccessListener { document ->
-                        if (document != null) {
-
-                            val updateData = hashMapOf(
-                                "keranjang" to "false",
-                                "keranjang_by" to "null",
-                            )
-
-                            produkDocument.update(updateData as Map<String, Any>)
-                                .addOnSuccessListener {
-                                    val intent = Intent(itemView.context, KeranjangActivity::class.java)
-                                    itemView.context.startActivity(intent)
-                                    (itemView.context as Activity).finish()
-                                    Toast.makeText(itemView.context, "Berhasil Di Hapus Dari Keranjang", Toast.LENGTH_SHORT).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.w("Keranjang Adapter", "failure : ", e)
-                                }
-                        } else {
-                            Log.d("Keranjang Adapter", "Dokumen tidak ditemukan.")
+                    val produkDocument = db.collection("keranjang").document("${produk.id_produk}_${auth.uid}")
+                    produkDocument.delete()
+                        .addOnSuccessListener {
+                            Toast.makeText(itemView.context, "Produk Dihapus Dari Keranjang", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(itemView.context, KeranjangActivity::class.java)
+                            itemView.context.startActivity(intent)
                         }
-                    }.addOnFailureListener { e ->
-                        Log.w("Keranjang Adapter", "Gagal mendapatkan dokumen: ", e)
-                    }
+                        .addOnFailureListener { e ->
+                            Log.w("Produk Adapter", "failure : ", e)
+                        }
                 }
                 builder.setNegativeButton("Batal") { dialog, _ ->
                     dialog.dismiss()

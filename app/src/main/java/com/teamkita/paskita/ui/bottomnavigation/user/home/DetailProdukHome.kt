@@ -13,9 +13,12 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamkita.paskita.R
+import com.teamkita.paskita.data.Favorite
+import com.teamkita.paskita.data.Keranjang
 import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ActivityDetailProdukHomeBinding
 import com.teamkita.paskita.ui.bottomnavigation.BottomNavigation
+import com.teamkita.paskita.ui.bottomnavigation.user.adapter.ProdukAdapter
 import com.teamkita.paskita.ui.bottomnavigation.user.notifikasi.NotifikasiActivity
 import com.teamkita.paskita.ui.bottomnavigation.user.pesan.PesanActivity
 import com.teamkita.paskita.ui.bottomnavigation.user.ratingdanulasan.Rating
@@ -114,62 +117,64 @@ class DetailProdukHome : AppCompatActivity() {
             }
 
             binding.ivKeranjang.setOnClickListener {
-                Toast.makeText(applicationContext, "Produk Berhasil Di Tambahkan Ke Keranjang", Toast.LENGTH_SHORT).show()
+                val produkDocument = db.collection("keranjang").document("${produk.id_produk}_${user.uid}")
+                val user = auth.currentUser
+
+                val saveData = Keranjang(
+                    id_produk =  produk.id_produk,
+                    keranjang_by = user?.uid,
+                )
+                produkDocument.set(saveData)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Di Tambahkan Ke Keranjang", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("Produk Adapter", "failure : ", e)
+                    }
             }
 
-            binding.ivFav.isChecked = produk.favorite.equals("true")
+            binding.ivFav.isChecked = false
+
+            val favCollection = db.collection("favorite").document("${produk.id_produk}_${user.uid}")
+            favCollection.get()
+                ?.addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        val userData = documentSnapshot.data
+                        val favorite = userData?.get("favorite") as String
+
+                        binding.ivFav.isChecked = favorite.equals("true")
+                    }
+                }
+                ?.addOnFailureListener { e ->
+                    Log.w("GetUserData", "Gagal mengambil data: ", e)
+                }
 
             binding.ivFav.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked){
-                    val produkDocument = db.collection("produk").document(produk.id_produk.toString())
-                    produkDocument.get().addOnSuccessListener { document ->
-                        if (document != null) {
+                    val produkDocument = db.collection("favorite").document("${produk.id_produk}_${user.uid}")
+                    val user = auth.currentUser
 
-                            val user = auth.currentUser
+                    val saveData = Favorite(
+                        id_produk =  produk.id_produk,
+                        favorite_by = user?.uid,
+                        favorite = "true",
+                    )
+                    produkDocument.set(saveData)
+                        .addOnSuccessListener {
 
-                            val updateData = hashMapOf(
-                                "favorite" to "true",
-                                "favorite_by" to user?.uid,
-                            )
-
-                            // Update total_produk pada dokumen penjual
-                            produkDocument.update(updateData as Map<String, Any>)
-                                .addOnSuccessListener {
-                                    Toast.makeText(applicationContext, "Berhasil Di Tambahkan Favorite", Toast.LENGTH_SHORT).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.w("Produk Adapter", "failure : ", e)
-                                }
-                        } else {
-                            Log.d("Produk Adapter", "Dokumen tidak ditemukan.")
                         }
-                    }.addOnFailureListener { e ->
-                        Log.w("Produk Adapter", "Gagal mendapatkan dokumen: ", e)
-                    }
+                        .addOnFailureListener { e ->
+                            Log.w("Produk Adapter", "failure : ", e)
+                        }
                 }else{
-                    val produkDocument = db.collection("produk").document(produk.id_produk.toString())
-                    produkDocument.get().addOnSuccessListener { document ->
-                        if (document != null) {
-
-                            val updateData = hashMapOf(
-                                "favorite" to "false",
-                                "favorite_by" to "null",
-                            )
-
-                            // Update total_produk pada dokumen penjual
-                            produkDocument.update(updateData as Map<String, Any>)
-                                .addOnSuccessListener {
-                                    Toast.makeText(applicationContext, "Produk Dihapus Dari Favorite", Toast.LENGTH_SHORT).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.w("Produk Adapter", "failure : ", e)
-                                }
-                        } else {
-                            Log.d("Produk Adapter", "Dokumen tidak ditemukan.")
+                    val produkDocument = db.collection("favorite").document("${produk.id_produk}_${user.uid}")
+                    produkDocument.delete()
+                        .addOnSuccessListener {
+                            Toast.makeText(applicationContext, "Produk Dihapus Dari Favorite", Toast.LENGTH_SHORT).show()
                         }
-                    }.addOnFailureListener { e ->
-                        Log.w("Produk Adapter", "Gagal mendapatkan dokumen: ", e)
-                    }
+                        .addOnFailureListener { e ->
+                            Log.w("Produk Adapter", "failure : ", e)
+                        }
                 }
             }
         }else{

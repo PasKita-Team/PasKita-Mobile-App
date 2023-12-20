@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.teamkita.paskita.R
+import com.teamkita.paskita.data.Favorite
 import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ActivityFavoriteProdukBinding
 import com.teamkita.paskita.ui.bottomnavigation.BottomNavigation
@@ -115,17 +116,32 @@ class FavoriteProdukActivity : AppCompatActivity() {
     }
 
     private fun setFavoriteData() {
+        db = FirebaseFirestore.getInstance()
         val user = auth.currentUser
-        val favCollection = db.collection("produk")
+        val favCollection = db.collection("favorite")
         val query = favCollection.whereEqualTo("favorite_by", user?.uid)
         query.get()
             .addOnSuccessListener {
                 if (!it.isEmpty){
-                    listProduk.clear()
                     for (data in it.documents){
-                        val produk: Produk? = data.toObject(Produk::class.java)
-                        if (produk != null) {
-                            listProduk.add(produk)
+                        listProduk.clear()
+                        val favorite: Favorite? = data.toObject(Favorite::class.java)
+                        if (favorite != null){
+                            val id_produk = favorite.id_produk
+                            val produkCollection = db.collection("produk").document(id_produk.toString())
+                            produkCollection.get()
+                                .addOnSuccessListener { produkDocument ->
+                                    if (produkDocument.exists()) {
+                                        val produk: Produk? = produkDocument.toObject(Produk::class.java)
+                                        if (produk != null) {
+                                            listProduk.add(produk)
+                                        }
+                                        binding.rvFavorite.adapter = ProdukAdapter(listProduk)
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Toast.makeText(applicationContext, exception.toString(), Toast.LENGTH_SHORT).show()
+                                }
                         }
                     }
                     binding.rvFavorite.adapter = ProdukAdapter(listProduk)
@@ -138,17 +154,30 @@ class FavoriteProdukActivity : AppCompatActivity() {
     private fun searchFavorite(queryString: String) {
         db = FirebaseFirestore.getInstance()
         val user = auth.currentUser
-        val favCollection = db.collection("produk")
+        val favCollection = db.collection("favorite")
         val query = favCollection.whereEqualTo("favorite_by", user?.uid)
         query.get()
             .addOnSuccessListener {
                 if (!it.isEmpty){
-                    listProduk.clear()
                     for (data in it.documents){
-                        val produk: Produk? = data.toObject(Produk::class.java)
-                        if (produk?.nama_produk?.contains(queryString, ignoreCase = true) == true
-                        ) {
-                            listProduk.add(produk)
+                        val favorite: Favorite? = data.toObject(Favorite::class.java)
+                        if (favorite != null){
+                            val id_produk = favorite.id_produk
+                            val produkCollection = db.collection("produk").document(id_produk.toString())
+                            produkCollection.get()
+                                .addOnSuccessListener { produkDocument ->
+                                    if (produkDocument.exists()) {
+                                        listProduk.clear()
+                                        val produk: Produk? = produkDocument.toObject(Produk::class.java)
+                                        if (produk != null) {
+                                            listProduk.add(produk)
+                                        }
+                                        binding.rvFavorite.adapter = ProdukAdapter(listProduk)
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Toast.makeText(applicationContext, exception.toString(), Toast.LENGTH_SHORT).show()
+                                }
                         }
                     }
                     binding.rvFavorite.adapter = ProdukAdapter(listProduk)

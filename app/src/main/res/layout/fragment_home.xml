@@ -1,219 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    tools:context=".ui.bottomnavigation.HomeFragment">-->
-
-<!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-<!--    <Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="start"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            android:contentDescription="@string/app_name"-->
-<!--            android:src="@drawable/tulisan_paskita" />-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:gravity="end">-->
-
-<!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
-<!--                android:id="@+id/switchTheme"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/ivPesan"-->
-<!--                android:layout_width="32dp"-->
-<!--                android:layout_height="32dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                android:contentDescription="@string/chat"-->
-<!--                android:src="@drawable/pesan" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/ivNotif"-->
-<!--                android:layout_width="32dp"-->
-<!--                android:layout_height="32dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginStart="5dp"-->
-<!--                android:layout_marginEnd="20dp"-->
-<!--                android:contentDescription="@string/chat"-->
-<!--                android:src="@drawable/notifikasi" />-->
-
-<!--        </LinearLayout>-->
-
-<!--    </Toolbar>-->
-
-<!--</LinearLayout>-->
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.bottomnavigation.user.home.HomeFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/tulisan_paskita"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:alpha="0.7"
-        android:background="@drawable/bg_icon"
-        android:padding="10dp"
-        android:src="@drawable/baseline_search_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.698"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/tulisan_paskita" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:alpha="0.7"
-        android:background="@drawable/bg_icon"
-        android:padding="10dp"
-        android:src="@drawable/baseline_chat_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.824"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:alpha="0.7"
-        android:background="@drawable/bg_icon"
-        android:padding="10dp"
-        android:src="@drawable/baseline_notifications_none_24"
-        android:contentDescription="@string/title_notifications"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.956"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
+                <ImageView
+                    android:id="@+id/ivKeranjang"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:contentDescription="@string/chat"
+                    android:src="@drawable/keranjang" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/bg_menu"
-        android:padding="18dp"
-        android:src="@drawable/baseline_food_bank_24"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                <ImageView
+                    android:id="@+id/ivPesan"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:contentDescription="@string/chat"
+                    android:src="@drawable/pesan" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_menu"
-        android:padding="18dp"
-        android:src="@drawable/baseline_food_bank_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                <ImageView
+                    android:id="@+id/ivNotif"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/chat"
+                    android:src="@drawable/notifikasi" />
 
+            </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_menu"
-        android:padding="18dp"
-        android:src="@drawable/baseline_food_bank_24"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        </Toolbar>
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_menu"
-        android:padding="18dp"
-        android:src="@drawable/baseline_food_bank_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        <com.arlib.floatingsearchview.FloatingSearchView
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:elevation="15dp"
+            app:floatingSearch_leftActionMode="showSearch"
+            app:floatingSearch_dimBackground="true"
+            app:floatingSearch_menu="@menu/option_menu"
+            app:floatingSearch_searchHint="@string/cari_produk"
+            app:floatingSearch_backgroundColor="@color/white"
+            app:floatingSearch_menuItemIconColor="@color/primary"
+            android:hint="@string/cari_produk">
+        </com.arlib.floatingsearchview.FloatingSearchView>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:text="Populer Baru-baru ini"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.054" />
+        <LinearLayout
+            android:id="@+id/llKategori"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/searchBar"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/baseline_arrow_right_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="180dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kategori"
+                android:fontFamily="@font/dm_sans_bold"
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                android:textSize="18sp" />
 
-    <ImageView
-        android:contentDescription="@string/produk"
-        android:layout_width="170dp"
-        android:layout_height="261dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="170dp"
-        android:layout_height="261dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvMakanan"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="@color/primary">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/makanan"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/makanan"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="@string/makanan"
+                                android:gravity="center"
+                                android:fontFamily="@font/dm_sans"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvMinuman"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="#4B9DCB">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/minuman"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/minuman"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="@string/minuman"
+                                android:gravity="center"
+                                android:fontFamily="@font/dm_sans"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvKerajinan"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="#AF558B">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/kerajinan"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/kerajinan"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="@string/kerajinan"
+                                android:gravity="center"
+                                android:fontFamily="@font/dm_sans"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvSambal"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        app:cardBackgroundColor="#F14336">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/sambal"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/sambal"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="@string/sambal"
+                                android:gravity="center"
+                                android:fontFamily="@font/dm_sans"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/llKategori"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/tvPopuler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/populer_baru_baru_ini"
+                android:fontFamily="@font/dm_sans_bold"
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                app:drawableEndCompat="@drawable/baseline_arrow_forward_ios_24" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHomeProduk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    tools:listitem="@layout/list_item_produk"/>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

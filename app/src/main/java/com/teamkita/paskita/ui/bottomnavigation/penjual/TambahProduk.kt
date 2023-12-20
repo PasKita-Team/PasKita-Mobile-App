@@ -550,11 +550,6 @@ class TambahProduk : AppCompatActivity() {
         val terjual = 0
         val rating = 0
         val ulasan_produk = "belum ada ulasan"
-        val favorite = false
-        val favorite_by = "null"
-        val keranjang = false
-        val keranjang_by = "null"
-
         if (namaProduk.isNullOrEmpty() ||
             hargaProduk.isNullOrEmpty() ||
             deskripsiProduk.isNullOrEmpty() ||
@@ -587,10 +582,6 @@ class TambahProduk : AppCompatActivity() {
                 uid_penjual = user.uid,
                 nama_toko = namaToko,
                 alamat_toko = alamatToko,
-                favorite = favorite.toString(),
-                favorite_by = favorite_by,
-                keranjang = keranjang.toString(),
-                keranjang_by = keranjang_by,
             )
 
             //update ke penjual
@@ -601,7 +592,6 @@ class TambahProduk : AppCompatActivity() {
                     val totalProdukSaatIni = totalProdukSaatIniString?.toInt() ?: 0
                     val totalProdukBaru = totalProdukSaatIni + 1
 
-                    // Membuat objek untuk diupdate dengan total_produk yang baru
                     val updateData = hashMapOf(
                         "total_produk" to totalProdukBaru.toString(),
                     )

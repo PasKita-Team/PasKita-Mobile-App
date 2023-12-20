@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.teamkita.paskita.data.Favorite
+import com.teamkita.paskita.data.Keranjang
 import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ListItemProdukBinding
 import com.teamkita.paskita.ui.bottomnavigation.user.home.DetailProdukHome
@@ -50,29 +52,20 @@ class ProdukAdapter(private val listProduk: ArrayList<Produk>) :
 
             if (user != null){
                 binding.btnKeranjang.setOnClickListener {
-                    val produkDocument = db.collection("produk").document(produk.id_produk.toString())
-                    produkDocument.get().addOnSuccessListener { document ->
-                        if (document != null) {
+                    val produkDocument = db.collection("keranjang").document("${produk.id_produk}_${user.uid}")
+                    val user = auth.currentUser
 
-                            val updateData = hashMapOf(
-                                "keranjang" to "true",
-                                "keranjang_by" to user.uid,
-                            )
-
-                            // Update total_produk pada dokumen penjual
-                            produkDocument.update(updateData as Map<String, Any>)
-                                .addOnSuccessListener {
-                                    Toast.makeText(itemView.context, "Berhasil Di Tambahkan Keranjang", Toast.LENGTH_SHORT).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.w("Produk Adapter", "failure : ", e)
-                                }
-                        } else {
-                            Log.d("Produk Adapter", "Dokumen tidak ditemukan.")
+                    val saveData = Keranjang(
+                        id_produk =  produk.id_produk,
+                        keranjang_by = user?.uid,
+                    )
+                    produkDocument.set(saveData)
+                        .addOnSuccessListener {
+                            Toast.makeText(itemView.context, "Di Tambahkan Ke Keranjang", Toast.LENGTH_SHORT).show()
                         }
-                    }.addOnFailureListener { e ->
-                        Log.w("Produk Adapter", "Gagal mendapatkan dokumen: ", e)
-                    }
+                        .addOnFailureListener { e ->
+                            Log.w("Produk Adapter", "failure : ", e)
+                        }
                 }
 
             }else {
