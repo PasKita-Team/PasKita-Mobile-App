@@ -21,9 +21,12 @@
             <CheckBox
                 android:id="@+id/cbFotoProduk"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@string/pilih_satu"
+                android:fontFamily="@font/dm_sans_bold"/>
 
             <ImageView
+                android:id="@+id/ivTemplate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/upload_foto"

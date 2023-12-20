@@ -309,7 +309,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/upload_foto_produk_anda"
+                                android:text="@string/foto_produk"
                                 android:fontFamily="@font/dm_sans_bold"
                                 android:textStyle="bold"
                                 android:textSize="16sp" />
@@ -317,12 +317,6 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
-
-                    <CheckBox
-                        android:id="@+id/cbFotoProduk"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/jadikan_foto_diatas_sebagai_foto_produk_saya"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -489,6 +483,7 @@
                         android:id="@+id/btnGenerate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/dm_sans_bold"
                         android:text="@string/generate"
@@ -496,40 +491,6 @@
                         android:textSize="16sp"
                         android:textColor="@color/white"
                         android:backgroundTint="@color/primary"/>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/tvHasilGenerate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="start"
-                        android:text="@string/hasil_generate"
-                        android:fontFamily="@font/dm_sans_bold"
-                        android:textStyle="bold"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/tvSilahkanPilih"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:text="@string/silahkan_pilih_dan_download_lalu_upload_di_seluruh_sosial_media_anda"
-                        android:fontFamily="@font/dm_sans"
-                        android:textStyle="bold"
-                        android:textSize="16sp" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvProduk"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        tools:listitem="@layout/list_item_generate"/>
 
                     <TextView
                         android:id="@+id/tvTambahanFoto"
@@ -579,7 +540,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/upload_foto_produk_anda"
+                                android:text="@string/foto_produk"
                                 android:fontFamily="@font/dm_sans_bold"
                                 android:textStyle="bold"
                                 android:textSize="16sp" />
@@ -625,7 +586,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/upload_foto_produk_anda"
+                                android:text="@string/foto_produk"
                                 android:fontFamily="@font/dm_sans_bold"
                                 android:textStyle="bold"
                                 android:textSize="16sp" />
@@ -671,7 +632,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/upload_foto_produk_anda"
+                                android:text="@string/foto_produk"
                                 android:fontFamily="@font/dm_sans_bold"
                                 android:textStyle="bold"
                                 android:textSize="16sp" />
@@ -686,6 +647,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="@string/saya_menjamin_bahwa_produk_yang_akan_saya_pasarkan_di_paskita_adalah_produk_orisinil"/>
+
+                    <CheckBox
+                        android:id="@+id/cbSetuju2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jika_produk_yang_saya_pasarkan_terbukti_tidak_orisinil_maka_pihak_paskita_berhak_menghapus_produk_saya"/>
 
                     <Button
                         android:id="@+id/btnSimpan"

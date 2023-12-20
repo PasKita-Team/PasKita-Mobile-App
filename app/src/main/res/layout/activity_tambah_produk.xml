@@ -509,6 +509,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:visibility="gone"
                         android:gravity="start"
                         android:text="@string/hasil_generate"
                         android:fontFamily="@font/dm_sans_bold"
@@ -520,6 +521,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
+                        android:visibility="gone"
                         android:text="@string/silahkan_pilih_dan_download_lalu_upload_di_seluruh_sosial_media_anda"
                         android:fontFamily="@font/dm_sans"
                         android:textStyle="bold"
@@ -527,6 +529,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvProduk"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"

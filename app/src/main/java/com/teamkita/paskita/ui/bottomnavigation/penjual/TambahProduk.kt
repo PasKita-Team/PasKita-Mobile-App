@@ -19,6 +19,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -31,8 +34,13 @@ import com.google.firebase.storage.OnProgressListener
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.teamkita.paskita.R
+import com.teamkita.paskita.data.HasilGenerate
 import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ActivityTambahProdukBinding
+import com.teamkita.paskita.ui.bottomnavigation.penjual.adapter.TemplateAdapter
+import com.teamkita.paskita.ui.bottomnavigation.user.adapter.KeranjangProdukAdapter
+import com.teamkita.paskita.ui.bottomnavigation.user.keranjang.KeranjangActivity
+import com.teamkita.paskita.ui.bottomnavigation.user.keranjang.KeranjangViewModel
 import me.abhinay.input.CurrencySymbols.INDONESIA
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -42,6 +50,8 @@ import java.io.InputStream
 class TambahProduk : AppCompatActivity() {
 
     private lateinit var binding: ActivityTambahProdukBinding
+    private lateinit var viewModel: TambahProdukViewModel
+
     private val PERMISSION_CAMERA_REQUEST_CODE = 1
     private val PERMISSION_READ_EXTERNAL_STORAGE_REQUEST_CODE = 1
 
@@ -59,6 +69,7 @@ class TambahProduk : AppCompatActivity() {
 
     private var namaToko: String? = null
     private var alamatToko: String? = null
+    private var url_foto_produk:String? = null
 
     val nUser = FirebaseAuth.getInstance().currentUser
     private val db = FirebaseFirestore.getInstance()
@@ -83,6 +94,18 @@ class TambahProduk : AppCompatActivity() {
         storage = FirebaseStorage.getInstance().reference
         cekPermission()
 
+        viewModel = ViewModelProvider(this)[TambahProdukViewModel::class.java]
+        viewModel.url_produk.observe(this, Observer { url ->
+            if (url.isNotEmpty()){
+                url_foto_produk = url
+            }else{
+                url_foto_produk = url_produk
+            }
+        })
+
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvProduk.layoutManager = layoutManager
+
         setActionButton()
         setupAction()
     }
@@ -93,6 +116,13 @@ class TambahProduk : AppCompatActivity() {
             val intent = Intent(this, DashboardPenjual::class.java)
             startActivity(intent)
             finish()
+        }
+
+        binding.btnGenerate.setOnClickListener {
+            nUser?.let { user ->
+                updateDataGenerate(user)
+            }
+
         }
 
         binding.cvFotoProduk.setOnClickListener {
@@ -156,6 +186,18 @@ class TambahProduk : AppCompatActivity() {
                 binding.btnSimpan.setBackgroundColor(Color.GRAY)
                 binding.btnSimpan.isEnabled = false
             }
+        }
+    }
+
+    private fun setDataTemplate(template: List<HasilGenerate>) {
+        if(template.isNotEmpty()){
+            showLoading(false)
+            showTvHasilGenerate(true)
+            showTvSilahkanPilih(true)
+            showRvProduk(true)
+            val produkAdapter = TemplateAdapter(this)
+            produkAdapter.submitList(template)
+            binding.rvProduk.adapter = produkAdapter
         }
     }
 
@@ -535,6 +577,36 @@ class TambahProduk : AppCompatActivity() {
         }
     }
 
+    private fun updateDataGenerate(user: FirebaseUser) {
+        val namaProduk = binding.etNamaProduk.text?.toString()
+        val hargaProduk = binding.etHargaProduk.text?.toString()
+        val daerahProduk = binding.etDaerah.text?.toString()
+        val kataPromosi = binding.etKataPromosi.text?.toString()
+        val instagram = binding.etInstagram.text?.toString()
+        val whatsapp = binding.etWhatsapp.text?.toString()
+        val tiktok = binding.etTiktok.text?.toString()
+        val user_uid = user.uid
+
+        val updateData = hashMapOf(
+            "user_uid" to user_uid,
+            "asal_daerah" to daerahProduk,
+            "harga_produk" to hargaProduk,
+            "instagram" to instagram,
+            "tiktok" to tiktok,
+            "whatsapp" to whatsapp,
+            "kata_promosi" to kataPromosi,
+            "nama_produk" to namaProduk,
+            "url_foto_produk" to url_produk,
+        )
+
+        val produkDocument = db.collection("generate_uid").document("generate_uid")
+        produkDocument.update(updateData as Map<String, Any>)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Mulai Generate", Toast.LENGTH_SHORT).show()
+                showLoading(true)
+            }
+    }
+
     private fun simpanData(user: FirebaseUser) {
 
         val namaProduk = binding.etNamaProduk.text?.toString()
@@ -559,7 +631,6 @@ class TambahProduk : AppCompatActivity() {
             kataPromosi.isNullOrEmpty()) {
             Toast.makeText(applicationContext, "Periksa Lagi Data Yang Anda Inputkan Mungkin Masih Ada Data Penting Yang Belum Anda Inputkan:)", Toast.LENGTH_SHORT).show()
         }else{
-
             val newProduk = Produk(
                 id_produk = id_produk,
                 nama_produk = namaProduk,
@@ -568,7 +639,7 @@ class TambahProduk : AppCompatActivity() {
                 kategori_produk = ketegoriProduk,
                 daerah_produk = daerahProduk,
                 berat_produk  = beratProduk,
-                url_foto_produk = url_produk,
+                url_foto_produk = url_foto_produk,
                 kata_promosi = kataPromosi,
                 instagram = instagram,
                 whatsapp = whatsapp,
@@ -596,7 +667,6 @@ class TambahProduk : AppCompatActivity() {
                         "total_produk" to totalProdukBaru.toString(),
                     )
 
-                    // Update total_produk pada dokumen penjual
                     penjualDocument.update(updateData as Map<String, Any>)
                         .addOnSuccessListener {
                             // Lanjutkan untuk menyimpan data produk
@@ -619,6 +689,44 @@ class TambahProduk : AppCompatActivity() {
             }.addOnFailureListener { e ->
                 Log.w("TambahProduk", "Gagal mendapatkan dokumen penjual: ", e)
             }
+
+            val produkCollection = db.collection("hasil_generated")
+            val query = produkCollection.whereEqualTo("user_id", user.uid)
+
+            query.get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        val updates = HashMap<String, Any?>()
+
+                        for (field in document.data.keys) {
+                            updates[field] = null
+                        }
+
+                        document.reference
+                            .update(updates)
+                            .addOnSuccessListener {
+                                // Dokumen berhasil diperbarui dengan field menjadi null
+
+                                // Setelah field-field diubah menjadi null, hapus dokumen
+                                document.reference.delete()
+                                    .addOnSuccessListener {
+                                        // Dokumen berhasil dihapus setelah field-field diubah menjadi null
+                                    }
+                                    .addOnFailureListener { e ->
+                                        // Penanganan kesalahan jika gagal menghapus dokumen
+                                        Log.w("Firestore", "Error deleting document", e)
+                                    }
+                            }
+                            .addOnFailureListener { e ->
+                                // Penanganan kesalahan jika gagal memperbarui dokumen
+                                Log.w("Firestore", "Error updating document", e)
+                            }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // Penanganan kesalahan jika gagal mendapatkan dokumen
+                    Log.w("Firestore", "Error getting documents", e)
+                }
 
         }
 
@@ -654,5 +762,13 @@ class TambahProduk : AppCompatActivity() {
     private fun showTvHasilGenerate(state: Boolean) { binding.tvHasilGenerate.visibility = if (state) View.VISIBLE else View.GONE }
     private fun showTvSilahkanPilih(state: Boolean) { binding.tvSilahkanPilih.visibility = if (state) View.VISIBLE else View.GONE }
     private fun showRvProduk(state: Boolean) { binding.rvProduk.visibility = if (state) View.VISIBLE else View.GONE }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.fetchTemplateList()
+        viewModel.getGenerateListLiveData().observe(this) { listTemplate ->
+            setDataTemplate(listTemplate)
+        }
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.teamkita.paskita.ui.bottomnavigation.penjual
+package com.teamkita.paskita.ui.bottomnavigation.penjual.adapter
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -16,6 +16,9 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ListItemProdukPenjualBinding
+import com.teamkita.paskita.ui.bottomnavigation.penjual.DashboardPenjual
+import com.teamkita.paskita.ui.bottomnavigation.penjual.DetailProdukPenjual
+import com.teamkita.paskita.ui.bottomnavigation.penjual.EditProduk
 
 class ProdukPenjualAdapter : ListAdapter<Produk, ProdukPenjualAdapter.MyViewHolder>(DIFF_CALLBACK) {
 

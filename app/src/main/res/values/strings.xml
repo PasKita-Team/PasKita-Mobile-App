@@ -107,7 +107,7 @@
     <string name="jadikan_foto_diatas_sebagai_foto_produk_saya">Jadikan Foto Diatas Sebagai Foto Produk Saya</string>
     <string name="generate_foto_produk">Generate Foto Produk</string>
     <string name="kata_kata_promosi_produk">Kata-kata Promosi Produk</string>
-    <string name="lebih_dari_10_kata">Lebih Baik Tidak Lebih Dari 10 Kata</string>
+    <string name="lebih_dari_10_kata">Minimal 5 Kata</string>
     <string name="sosial_media">Sosial Media</string>
     <string name="instagram">Instagram</string>
     <string name="contoh_instagram">contoh : @instagram</string>
@@ -188,6 +188,7 @@
     <string name="nama_user">Nama User</string>
     <string name="jika_produk_yang_saya_pasarkan_terbukti_tidak_orisinil_maka_pihak_paskita_berhak_menghapus_produk_saya">Jika produk yang saya pasarkan terbukti tidak orisinil, maka pihak PasKita berhak menghapus produk saya</string>
     <string name="tulis_pesan">Tulis Pesan...</string>
+    <string name="pilih_satu">Pilih Satu</string>
 
     <string-array name="list_courier">
         <item>POS</item>

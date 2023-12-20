@@ -115,27 +115,10 @@ class EditProduk : AppCompatActivity() {
         binding.etHargaProduk.setSeparator(".")
 
         binding.btnGenerate.isEnabled = true
-        showLoading(false)
-        showTvHasilGenerate(false)
-        showTvSilahkanPilih(false)
-        showRvProduk(false)
-        binding.cbFotoProduk.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
-                binding.btnGenerate.setBackgroundColor(Color.GRAY)
-                binding.btnGenerate.isEnabled = false
-                showLoading(false)
-                showTvHasilGenerate(false)
-                showTvSilahkanPilih(false)
-                showRvProduk(false)
-            }else{
-                binding.btnGenerate.isEnabled = true
-                binding.btnGenerate.setBackgroundColor(Color.parseColor("#4AB7B6"))
-            }
-        }
 
         binding.btnSimpan.setBackgroundColor(Color.GRAY)
         binding.btnSimpan.isEnabled = false
-        binding.cbSetuju.setOnCheckedChangeListener { _, isChecked ->
+        binding.cbSetuju2.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 binding.btnSimpan.isEnabled = true
                 binding.btnSimpan.setBackgroundColor(Color.parseColor("#4AB7B6"))
@@ -150,7 +133,6 @@ class EditProduk : AppCompatActivity() {
 
         val produk = intent.getParcelableExtra<Produk>("produk") as Produk
 
-        binding.cbFotoProduk.isChecked = true
         binding.btnGenerate.setBackgroundColor(Color.GRAY)
         binding.btnGenerate.isEnabled = false
 
@@ -684,9 +666,4 @@ class EditProduk : AppCompatActivity() {
             )
         }
     }
-
-    private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
-    private fun showTvHasilGenerate(state: Boolean) { binding.tvHasilGenerate.visibility = if (state) View.VISIBLE else View.GONE }
-    private fun showTvSilahkanPilih(state: Boolean) { binding.tvSilahkanPilih.visibility = if (state) View.VISIBLE else View.GONE }
-    private fun showRvProduk(state: Boolean) { binding.rvProduk.visibility = if (state) View.VISIBLE else View.GONE }
 }

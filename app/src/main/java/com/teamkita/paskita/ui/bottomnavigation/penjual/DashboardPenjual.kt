@@ -14,6 +14,7 @@ import com.teamkita.paskita.R
 import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ActivityDashboardPenjualBinding
 import com.teamkita.paskita.ui.bottomnavigation.BottomNavigation
+import com.teamkita.paskita.ui.bottomnavigation.penjual.adapter.ProdukPenjualAdapter
 
 class DashboardPenjual : AppCompatActivity() {
 
