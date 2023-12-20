@@ -1,180 +1,324 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    tools:context=".ui.bottomnavigation.ProfileFragment">
+    tools:context=".ui.bottomnavigation.user.profile.ProfileFragment">
 
-    <Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/tulisan_paskita" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
+
+                <ImageView
+                    android:id="@+id/ivKeranjang"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:contentDescription="@string/chat"
+                    android:src="@drawable/keranjang" />
+
+                <ImageView
+                    android:id="@+id/ivPesan"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:contentDescription="@string/chat"
+                    android:src="@drawable/pesan" />
+
+                <ImageView
+                    android:id="@+id/ivNotif"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/chat"
+                    android:src="@drawable/notifikasi" />
+
+            </LinearLayout>
+
+        </Toolbar>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
             android:layout_marginStart="20dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/tulisan_paskita" />
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/secondary">
 
-        <LinearLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivPhotoUser"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/baseline_account_circle_24"
+                    android:contentDescription="@string/user" />
+
+                <TextView
+                    android:id="@+id/tvNamaUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/ivPhotoUser"
+                    android:text="@string/user"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvEmailUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/ivPhotoUser"
+                    android:layout_below="@+id/tvNamaUser"
+                    android:layout_centerVertical="true"
+                    android:text="@string/email"
+                    android:fontFamily="@font/dm_sans"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvKeluar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/keluar"
+                    android:fontFamily="@font/dm_sans_bold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:drawablePadding="10dp"
+                    app:drawableStartCompat="@drawable/keluar" />
+
+                <ImageView
+                    android:id="@+id/btnDaftarPenjual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/button_daftar_penjual"
+                    android:layout_below="@+id/ivPhotoUser"
+                    android:contentDescription="@string/daftar_menjadi_penjual" />
+
+                <ImageView
+                    android:id="@+id/btnDashboardPenjual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/btn_dashboard_penjual"
+                    android:layout_below="@+id/ivPhotoUser"
+                    android:contentDescription="@string/daftar_menjadi_penjual" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="end">
+            android:layout_marginTop="-30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="@color/white">
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switchTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/ivPesan"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:contentDescription="@string/chat"
-                android:src="@drawable/pesan" />
-
-            <ImageView
-                android:id="@+id/ivNotif"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="20dp"
-                android:contentDescription="@string/chat"
-                android:src="@drawable/notifikasi" />
-
-        </LinearLayout>
-
-    </Toolbar>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        app:cardBackgroundColor="@color/secondary">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/ivPhotoUser"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/baseline_account_circle_24"
-                android:contentDescription="@string/user" />
-
-            <TextView
-                android:id="@+id/tvNamaUser"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/ivPhotoUser"
-                android:text="@string/user"
-                android:fontFamily="@font/dm_sans_bold"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+                android:orientation="vertical"
+                android:layout_marginTop="40dp">
 
-            <TextView
-                android:id="@+id/tvEmailUser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/ivPhotoUser"
-                android:layout_below="@+id/tvNamaUser"
-                android:layout_centerVertical="true"
-                android:text="@string/email"
-                android:fontFamily="@font/dm_sans"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
 
-            <TextView
-                android:id="@+id/tvKeluar"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_alignParentEnd="true"
-                android:text="@string/keluar"
-                android:fontFamily="@font/dm_sans_bold"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:drawablePadding="10dp"
-                app:drawableStartCompat="@drawable/keluar" />
+                    <TextView
+                        android:id="@+id/tvInfoPribadi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/info_pribadi"
+                        android:fontFamily="@font/dm_sans"
+                        android:textSize="16sp"
+                        android:drawablePadding="10dp"
+                        app:drawableStartCompat="@drawable/baseline_lock_24" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/button_daftar_penjual"
-                android:layout_below="@+id/ivPhotoUser"
-                android:contentDescription="@string/daftar_menjadi_penjual" />
+                </androidx.cardview.widget.CardView>
 
-        </RelativeLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
 
-    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/tvFavorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/barang_favorite"
+                        android:fontFamily="@font/dm_sans"
+                        android:textSize="16sp"
+                        android:drawablePadding="10dp"
+                        app:drawableStartCompat="@drawable/favorite_full" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="-30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        app:cardCornerRadius="15dp"
-        app:cardBackgroundColor="@color/white">
+                </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvBantuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/bantuan"
+                        android:fontFamily="@font/dm_sans"
+                        android:textSize="16sp"
+                        android:drawablePadding="10dp"
+                        app:drawableStartCompat="@drawable/bantuan" />
 
-    </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <TextView
+                        android:id="@+id/tvPengaturan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/pengaturan"
+                        android:fontFamily="@font/dm_sans"
+                        android:textSize="16sp"
+                        android:drawablePadding="10dp"
+                        app:drawableStartCompat="@drawable/pengaturan" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp">
+
+                    <TextView
+                        android:id="@+id/tvTentang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tentang_kami"
+                        android:fontFamily="@font/dm_sans"
+                        android:textSize="16sp"
+                        android:drawablePadding="10dp"
+                        app:drawableStartCompat="@drawable/tulisan_paskita" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:visibility="invisible" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvSelamatDatang"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-1000dp"
+        android:visibility="invisible"
         app:cardCornerRadius="15dp"
         app:cardMaxElevation="20dp"
         app:cardElevation="20dp"
-        app:cardBackgroundColor="#B3D5CDCD">
+        app:cardBackgroundColor="#E6D5CDCD">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="400dp"
-                android:visibility="invisible" />
+            android:orientation="vertical"
+            android:layout_marginTop="180dp">
 
             <pl.droidsonroids.gif.GifImageView
                 android:layout_width="wrap_content"
@@ -250,5 +394,4 @@
 
     </androidx.cardview.widget.CardView>
 
-
-</LinearLayout>
+</RelativeLayout>

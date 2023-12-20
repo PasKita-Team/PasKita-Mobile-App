@@ -61,7 +61,6 @@
         android:alpha="0"
         android:text="@string/lengkapi_data_diri"
         android:fontFamily="@font/dm_sans"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         tools:alpha="100" />
@@ -75,7 +74,6 @@
         android:alpha="0"
         android:fontFamily="@font/dm_sans_bold"
         android:text="@string/email"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lengkapidata"
         tools:alpha="100" />
@@ -113,7 +111,6 @@
         android:alpha="0"
         android:fontFamily="@font/dm_sans_bold"
         android:text="@string/password"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout"
         tools:alpha="100" />
@@ -153,7 +150,6 @@
         android:alpha="0"
         android:fontFamily="@font/dm_sans_bold"
         android:text="@string/ulangi_password"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout"
         tools:alpha="100" />

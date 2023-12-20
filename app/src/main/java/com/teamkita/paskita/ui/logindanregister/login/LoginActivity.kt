@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.teamkita.paskita.databinding.ActivityLoginBinding
 import com.teamkita.paskita.ui.bottomnavigation.BottomNavigation
-import com.teamkita.paskita.ui.logindanregister.lupapassword.LupaPasswordActivity
+import com.teamkita.paskita.ui.logindanregister.lupapassword.LupaPassword
 import com.teamkita.paskita.ui.logindanregister.register.RegisterActivity
 
 
@@ -40,14 +40,17 @@ class LoginActivity : AppCompatActivity() {
 
         binding.ivBack.setOnClickListener {
             startActivity(Intent(this, BottomNavigation::class.java))
+            finish()
         }
 
         binding.tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
 
         binding.lupaPassword.setOnClickListener {
-            startActivity(Intent(this, LupaPasswordActivity::class.java))
+            startActivity(Intent(this, LupaPassword::class.java))
+            finish()
         }
 
         binding.loginButton.setOnClickListener {
@@ -73,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     showLoading(false)
                     Toast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(applicationContext, BottomNavigation::class.java))
+                    finish()
                 } else {
                     showLoading(false)
                     binding.emailEditTextLayout.error = "Silahkan Cek Email Dan Verifikasi Akun Anda"

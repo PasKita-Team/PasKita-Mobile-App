@@ -13,21 +13,23 @@ import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.teamkita.paskita.R
 import com.teamkita.paskita.databinding.ActivityLupaPasswordBinding
+import com.teamkita.paskita.databinding.ActivityUbahPasswordBinding
+import com.teamkita.paskita.ui.bottomnavigation.BottomNavigation
 import com.teamkita.paskita.ui.logindanregister.login.LoginActivity
 
-class LupaPasswordActivity : AppCompatActivity() {
+class UbahPassword : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLupaPasswordBinding
+    private lateinit var binding: ActivityUbahPasswordBinding
     private lateinit var auth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLupaPasswordBinding.inflate(layoutInflater)
+        binding = ActivityUbahPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = Firebase.auth
-        
+
         setupView()
         setupAction()
         playAnimation()
@@ -37,7 +39,8 @@ class LupaPasswordActivity : AppCompatActivity() {
     private fun setupAction() {
 
         binding.ivBack.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, BottomNavigation::class.java))
+            finish()
         }
 
         binding.lupasPasswordButton.setOnClickListener {
@@ -53,7 +56,7 @@ class LupaPasswordActivity : AppCompatActivity() {
                         binding.emailEditTextLayout.error = "Email Tidak Terdaftar!!"
                     }
                 }
-            
+
 
         }
     }
@@ -63,8 +66,9 @@ class LupaPasswordActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     showLoading(false)
-                    Toast.makeText(applicationContext, "Silahkan Check Email Anda, Link Reset Password Sudah Dikirimkan", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    Toast.makeText(applicationContext, "Silahkan Check Email Anda, Link Ubah Password Sudah Dikirimkan", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, BottomNavigation::class.java))
+                    finish()
                 } else {
                     showLoading(false)
                     Toast.makeText(applicationContext, "Gagal Mengirimkan Link", Toast.LENGTH_SHORT).show()
@@ -114,4 +118,5 @@ class LupaPasswordActivity : AppCompatActivity() {
     }
 
     private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
+
 }

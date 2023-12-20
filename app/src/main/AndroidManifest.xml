@@ -2,7 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -15,10 +25,58 @@
         android:theme="@style/Theme.PasKita"
         tools:targetApi="31">
         <activity
-            android:name=".ui.bottomnavigation.BottomNavigation"
-            android:exported="true"/>
+            android:name=".ui.bottomnavigation.user.pesan.DaftarPesanActivity"
+            android:exported="false" />
         <activity
-            android:name=".ui.logindanregister.lupapassword.LupaPasswordActivity"
+            android:name=".ui.bottomnavigation.user.pesan.PesanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.penjual.TransakiPenjualActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.user.daftartransaksi.DetailTransaksiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.user.notifikasi.NotifikasiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.user.transaksi.PembayaranActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.user.transaksi.TransaksiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.user.produk.ProdukActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.user.keranjang.KeranjangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.user.home.DetailProdukHome"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.penjual.EditProduk"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.penjual.DetailProdukPenjual"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.penjual.TambahProduk"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.penjual.DashboardPenjual"
+            android:exported="false" />
+        <activity
+            android:name=".ui.logindanregister.lupapassword.UbahPassword"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.user.favorite.FavoriteProdukActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.bottomnavigation.BottomNavigation"
+            android:exported="true" />
+        <activity
+            android:name=".ui.logindanregister.lupapassword.LupaPassword"
             android:exported="false" />
         <activity
             android:name=".ui.logindanregister.register.RegisterActivity"
@@ -29,13 +87,11 @@
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <meta-data

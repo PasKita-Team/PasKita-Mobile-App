@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.teamkita.paskita.databinding.ActivityRegisterBinding
 import com.teamkita.paskita.ui.bottomnavigation.BottomNavigation
 import com.teamkita.paskita.ui.logindanregister.login.LoginActivity
@@ -52,10 +54,12 @@ class RegisterActivity : AppCompatActivity() {
     private fun setupAction() {
         binding.ivBack.setOnClickListener {
             startActivity(Intent(this, BottomNavigation::class.java))
+            finish()
         }
 
         binding.tvLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         binding.signupButton.setOnClickListener {
@@ -92,9 +96,34 @@ class RegisterActivity : AppCompatActivity() {
                     auth.currentUser!!.sendEmailVerification()
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                showLoading(false)
-                                Toast.makeText(applicationContext, "Daftar Berhasil. Silahkan Cek Email Anda!!", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                                val user = auth.currentUser
+                                user?.let {
+                                    val userData = hashMapOf(
+                                        "email" to user.email,
+                                        "nama" to user.email?.substringBefore('@'),
+                                        "jenis_kelamin" to "Jenis Kelamin",
+                                        "no_hp" to "-",
+                                        "domisili" to "-",
+                                        "url_profile" to user.photoUrl.toString(),
+                                        "as" to "user",
+                                    )
+
+                                    val db = FirebaseFirestore.getInstance()
+                                    val userCollection = db.collection("users")
+
+                                    userCollection.document(user.uid)
+                                        .set(userData)
+                                        .addOnSuccessListener {
+                                            showLoading(false)
+                                            Toast.makeText(applicationContext, "Daftar Berhasil. Silahkan Cek Email Anda!!", Toast.LENGTH_SHORT).show()
+                                            startActivity(Intent(applicationContext, LoginActivity::class.java))
+                                            finish()
+                                        }
+                                        .addOnFailureListener { e ->
+                                            showLoading(false)
+                                            Log.w("RegisterActivity", "Gagal menyimpan data pengguna", e)
+                                        }
+                                }
                             } else {
                                 showLoading(false)
                                 Toast.makeText(applicationContext, "Verifikasi Gagal Di Kirim", Toast.LENGTH_SHORT).show()
@@ -102,7 +131,7 @@ class RegisterActivity : AppCompatActivity() {
                         }
                 } else {
                     showLoading(false)
-                    Toast.makeText(applicationContext, "Daftar Gagal", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Daftar Gagal, Mungkin Email Anda Sudah Pernah Di Gunakan", Toast.LENGTH_SHORT).show()
                 }
             }
     }
