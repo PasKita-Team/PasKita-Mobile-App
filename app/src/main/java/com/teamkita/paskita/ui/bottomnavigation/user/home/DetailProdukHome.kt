@@ -277,21 +277,27 @@ class DetailProdukHome : AppCompatActivity() {
             setImageSlider(produk.url_foto_produk, produk.url_foto_pendukung_1, produk.url_foto_pendukung_2, produk.url_foto_pendukung_3)
         }
 
-        binding.btnBeli.setOnClickListener {
+        if (user != null){
+            binding.btnBeli.setOnClickListener {
 
-            val totalHarga = binding.tvTotalHarga.text.toString()
-            val jumlah = binding.tvJumlah.text.toString()
+                val totalHarga = binding.tvTotalHarga.text.toString()
+                val jumlah = binding.tvJumlah.text.toString()
 
-            val intent = Intent(this, TransaksiActivity::class.java)
-            intent.putExtra("nama_toko", produk.nama_toko)
-            intent.putExtra("nama_produk", produk.nama_produk)
-            intent.putExtra("total_harga", totalHarga)
-            intent.putExtra("harga", produk.harga_produk)
-            intent.putExtra("jumlah", jumlah)
-            intent.putExtra("url_foto_produk", produk.url_foto_produk)
-            intent.putExtra("alamat_toko", produk.alamat_toko)
-            intent.putExtra("produk", produk)
-            startActivity(intent)
+                val intent = Intent(this, TransaksiActivity::class.java)
+                intent.putExtra("nama_toko", produk.nama_toko)
+                intent.putExtra("nama_produk", produk.nama_produk)
+                intent.putExtra("total_harga", totalHarga)
+                intent.putExtra("harga", produk.harga_produk)
+                intent.putExtra("jumlah", jumlah)
+                intent.putExtra("url_foto_produk", produk.url_foto_produk)
+                intent.putExtra("alamat_toko", produk.alamat_toko)
+                intent.putExtra("produk", produk)
+                startActivity(intent)
+            }
+        }else{
+            binding.btnBeli.setOnClickListener {
+                Toast.makeText(applicationContext, "Silahkan Login Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
