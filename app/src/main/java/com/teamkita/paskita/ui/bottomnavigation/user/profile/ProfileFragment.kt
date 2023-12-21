@@ -116,7 +116,7 @@ class ProfileFragment : Fragment() {
             informasiPribadi.show(requireFragmentManager(), InformasiPribadi.TAG)
         }
 
-        binding.btnDaftar.setOnClickListener {
+        binding.tvFavorite.setOnClickListener {
             startActivity(Intent(activity, FavoriteProdukActivity::class.java))
         }
 
