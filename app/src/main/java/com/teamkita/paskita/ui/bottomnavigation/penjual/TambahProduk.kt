@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
@@ -34,6 +33,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.OnProgressListener
 import com.google.firebase.storage.StorageReference
@@ -43,9 +43,6 @@ import com.teamkita.paskita.data.HasilGenerate
 import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ActivityTambahProdukBinding
 import com.teamkita.paskita.ui.bottomnavigation.penjual.adapter.TemplateAdapter
-import com.teamkita.paskita.ui.bottomnavigation.user.adapter.KeranjangProdukAdapter
-import com.teamkita.paskita.ui.bottomnavigation.user.keranjang.KeranjangActivity
-import com.teamkita.paskita.ui.bottomnavigation.user.keranjang.KeranjangViewModel
 import me.abhinay.input.CurrencySymbols.INDONESIA
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -114,6 +111,27 @@ class TambahProduk : AppCompatActivity() {
 
         setActionButton()
         setupAction()
+    }
+
+    private fun setupData() {
+        val userDocumentRef = nUser?.let { db.collection("users").document(it.uid) }
+
+        userDocumentRef?.get()
+            ?.addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val sebagai = documentSnapshot.getString("as")
+                    if (!sebagai.isNullOrEmpty() && sebagai == "penjual premium") {
+                        showBtnBelangganan(false)
+                    } else {
+                        showBtnBelangganan(true)
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Dokumen Users Tidak Ditemukan", Toast.LENGTH_SHORT).show()
+                }
+            }
+            ?.addOnFailureListener { exception ->
+                Toast.makeText(applicationContext, exception.toString(), Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun setupAction() {
@@ -211,6 +229,11 @@ class TambahProduk : AppCompatActivity() {
                 binding.btnSimpan.isEnabled = false
             }
         }
+
+        binding.btnBerlangganan.setOnClickListener {
+            val pilihLangganan = PilihLangganan.newInstance()
+            pilihLangganan.show(supportFragmentManager, PilihLangganan.TAG)
+        }
     }
 
     private fun setDataTemplate(template: List<HasilGenerate>) {
@@ -219,6 +242,7 @@ class TambahProduk : AppCompatActivity() {
             showTvHasilGenerate(true)
             showTvSilahkanPilih(true)
             showRvProduk(true)
+            setupData()
             val produkAdapter = TemplateAdapter(this)
             produkAdapter.submitList(template)
             binding.rvProduk.adapter = produkAdapter
@@ -786,6 +810,7 @@ class TambahProduk : AppCompatActivity() {
     private fun showTvHasilGenerate(state: Boolean) { binding.tvHasilGenerate.visibility = if (state) View.VISIBLE else View.GONE }
     private fun showTvSilahkanPilih(state: Boolean) { binding.tvSilahkanPilih.visibility = if (state) View.VISIBLE else View.GONE }
     private fun showRvProduk(state: Boolean) { binding.rvProduk.visibility = if (state) View.VISIBLE else View.GONE }
+    private fun showBtnBelangganan(state: Boolean) { binding.btnBerlangganan.visibility = if (state) View.VISIBLE else View.GONE }
 
     override fun onStart() {
         super.onStart()

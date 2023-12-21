@@ -111,31 +111,41 @@ class DashboardPenjual : AppCompatActivity() {
         showLoading(true)
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val userDocument = db.collection("penjual").document(currentUser.uid)
-            userDocument.addSnapshotListener { document, _ ->
+            val penjualDocument = db.collection("penjual").document(currentUser.uid)
+            penjualDocument.addSnapshotListener { document, _ ->
                 if (document != null && document.exists()) {
-                    val namaToko = document.getString("namaToko")
-                    val alamatToko = document.getString("alamatToko")
-                    val deskripsiToko = document.getString("deskripsiToko")
-                    val urlProfileToko = document.getString("url_profile_toko")
-                    val totalProduk = document.getString("total_produk")
-                    val terjual = document.getString("terjual")
 
-                    binding.tvNamaToko.text = namaToko
-                    binding.tvAlamatToko.text = alamatToko
-                    binding.tvDescToko.text = deskripsiToko
-                    binding.tvTotalProduk.text = totalProduk
-                    binding.tvTerjual.text = terjual
+                    val userDocument = db.collection("users").document(currentUser.uid)
+                    userDocument.addSnapshotListener { user, _ ->
+                        val sebagai = user?.getString("as")
 
-                    if (urlProfileToko != null){
-                        Glide.with(applicationContext)
-                            .load(urlProfileToko)
-                            .placeholder(R.drawable.tulisan_paskita)
-                            .error(R.drawable.baseline_error_24)
-                            .into(binding.ivPhotoUser)
+                        val namaToko = document.getString("namaToko")
+                        val alamatToko = document.getString("alamatToko")
+                        val deskripsiToko = document.getString("deskripsiToko")
+                        val urlProfileToko = document.getString("url_profile_toko")
+                        val totalProduk = document.getString("total_produk")
+                        val terjual = document.getString("terjual")
+
+                        if (sebagai.equals("penjual premium")){
+                            "$namaToko (Premium)".also { binding.tvNamaToko.text = it }
+                        }else{
+                            binding.tvNamaToko.text = namaToko
+                        }
+                        binding.tvAlamatToko.text = alamatToko
+                        binding.tvDescToko.text = deskripsiToko
+                        binding.tvTotalProduk.text = totalProduk
+                        binding.tvTerjual.text = terjual
+
+                        if (urlProfileToko != null){
+                            Glide.with(applicationContext)
+                                .load(urlProfileToko)
+                                .placeholder(R.drawable.tulisan_paskita)
+                                .error(R.drawable.baseline_error_24)
+                                .into(binding.ivPhotoUser)
+                        }
+
+                        showLoading(false)
                     }
-
-                    showLoading(false)
                 }
             }
         }

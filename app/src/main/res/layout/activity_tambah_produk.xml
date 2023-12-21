@@ -535,6 +535,13 @@
                         android:orientation="horizontal"
                         tools:listitem="@layout/list_item_generate"/>
 
+                    <Button
+                        android:id="@+id/btnBerlangganan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/berlangganan"/>
+
                     <TextView
                         android:id="@+id/tvTambahanFoto"
                         android:layout_width="match_parent"

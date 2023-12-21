@@ -169,6 +169,9 @@ class ProfileFragment : Fragment() {
                     if (sebagai.equals("penjual")) {
                         binding.btnDashboardPenjual.visibility = View.VISIBLE
                         binding.btnDaftarPenjual.visibility = View.GONE
+                    }else if (sebagai.equals("penjual premium")) {
+                        binding.btnDashboardPenjual.visibility = View.VISIBLE
+                        binding.btnDaftarPenjual.visibility = View.GONE
                     } else {
                         binding.btnDaftarPenjual.visibility = View.VISIBLE
                         binding.btnDashboardPenjual.visibility = View.GONE

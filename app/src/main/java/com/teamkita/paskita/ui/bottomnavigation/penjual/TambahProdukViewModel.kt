@@ -3,10 +3,12 @@ package com.teamkita.paskita.ui.bottomnavigation.penjual
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
+import com.teamkita.paskita.R
 import com.teamkita.paskita.data.HasilGenerate
 import com.teamkita.paskita.data.Produk
 
@@ -19,32 +21,70 @@ class TambahProdukViewModel : ViewModel() {
     fun fetchTemplateList() {
         produkList.clear()
         val currentUser = auth.currentUser
-        val prdkCollection = db.collection("hasil_generated")
-            .whereEqualTo("user_id", currentUser?.uid)
 
-        // Menggunakan addSnapshotListener untuk mendengarkan perubahan data pada koleksi
-        prdkCollection.addSnapshotListener { snapshots, exception ->
-            if (exception != null) {
-                println("Error listening for changes: $exception")
-                return@addSnapshotListener
-            }
+        val userDocument = currentUser?.let { db.collection("users").document(it.uid) }
+        userDocument?.addSnapshotListener { document, _ ->
+            if (document != null && document.exists()) {
+                val sebagai = document.getString("as")
+                if (sebagai.equals("penjual premium")){
+                    val prdkCollection = db.collection("hasil_generated")
+                        .whereEqualTo("user_id", currentUser.uid)
+                    // Menggunakan addSnapshotListener untuk mendengarkan perubahan data pada koleksi
+                    prdkCollection.addSnapshotListener { snapshots, exception ->
+                        if (exception != null) {
+                            println("Error listening for changes: $exception")
+                            return@addSnapshotListener
+                        }
 
-            // Bersihkan produkList sebelum menambahkan data baru
-            produkList.clear()
+                        // Bersihkan produkList sebelum menambahkan data baru
+                        produkList.clear()
 
-            // Jika tidak ada kesalahan dan ada data yang berubah
-            if (snapshots != null && !snapshots.isEmpty) {
-                for (data in snapshots) {
-                    val hasilGenerate: HasilGenerate = data.toObject<HasilGenerate>()
-                    produkList.add(hasilGenerate)
+                        // Jika tidak ada kesalahan dan ada data yang berubah
+                        if (snapshots != null && !snapshots.isEmpty) {
+                            for (data in snapshots) {
+                                val hasilGenerate: HasilGenerate = data.toObject<HasilGenerate>()
+                                produkList.add(hasilGenerate)
+                            }
+                            // Setelah mengupdate produkList, perbarui LiveData
+                            generateListLiveData.value = produkList
+                        } else {
+                            // Jika tidak ada data atau data kosong, atur LiveData menjadi null atau empty list
+                            generateListLiveData.value = emptyList()
+                        }
+                    }
+                }else{
+                    val prdkCollection = db.collection("hasil_generated")
+                        .whereEqualTo("user_id", currentUser.uid)
+                        .limit(2)
+                    // Menggunakan addSnapshotListener untuk mendengarkan perubahan data pada koleksi
+                    prdkCollection.addSnapshotListener { snapshots, exception ->
+                        if (exception != null) {
+                            println("Error listening for changes: $exception")
+                            return@addSnapshotListener
+                        }
+
+                        // Bersihkan produkList sebelum menambahkan data baru
+                        produkList.clear()
+
+                        // Jika tidak ada kesalahan dan ada data yang berubah
+                        if (snapshots != null && !snapshots.isEmpty) {
+                            for (data in snapshots) {
+                                val hasilGenerate: HasilGenerate = data.toObject<HasilGenerate>()
+                                produkList.add(hasilGenerate)
+                            }
+                            // Setelah mengupdate produkList, perbarui LiveData
+                            generateListLiveData.value = produkList
+                        } else {
+                            // Jika tidak ada data atau data kosong, atur LiveData menjadi null atau empty list
+                            generateListLiveData.value = emptyList()
+                        }
+                    }
                 }
-                // Setelah mengupdate produkList, perbarui LiveData
-                generateListLiveData.value = produkList
-            } else {
-                // Jika tidak ada data atau data kosong, atur LiveData menjadi null atau empty list
-                generateListLiveData.value = emptyList()
+
+
             }
         }
+
     }
 
     fun getGenerateListLiveData(): LiveData<List<HasilGenerate>> {

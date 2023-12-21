@@ -107,7 +107,7 @@
     <string name="jadikan_foto_diatas_sebagai_foto_produk_saya">Jadikan Foto Diatas Sebagai Foto Produk Saya</string>
     <string name="generate_foto_produk">Generate Foto Produk</string>
     <string name="kata_kata_promosi_produk">Kata-kata Promosi Produk</string>
-    <string name="lebih_dari_10_kata">Minimal 5 Kata</string>
+    <string name="lebih_dari_10_kata">Contoh : Renyah Dimulut Asli Rasanya</string>
     <string name="sosial_media">Sosial Media</string>
     <string name="instagram">Instagram</string>
     <string name="contoh_instagram">contoh : @instagram</string>
@@ -190,6 +190,12 @@
     <string name="tulis_pesan">Tulis Pesan...</string>
     <string name="pilih_satu">Pilih Satu</string>
     <string name="no_rek">Nomor Rekening</string>
+    <string name="berlangganan">Berlangganan Sekarang Untuk Menampilkan Lebih Banyak Hasil Generate</string>
+    <string name="belangganan_sekarang">Belangganan Sekarang Dan Generate Lebih Banyak Foto Produk Yang Cocok Untuk Produk Anda</string>
+    <string name="_1_bulan_rp29_900_diskon_10_jadi_rp26_910">1 Bulan/Rp29.900 (Diskon 10% Jadi Rp26.900)</string>
+    <string name="_3_bulan_rp79_900_diskon_20_jadi_63_900">3 Bulan/Rp79.900 (Diskon 20% Jadi 63.900)</string>
+    <string name="_6_bulan_rp159_900_diskon_30_jadi_111_900">6 Bulan/Rp159.900 (Diskon 30% Jadi 111.900)</string>
+    <string name="_1_tahun_rp399_900_diskon_50_jadi_199_900">1 Tahun/Rp399.900 (Diskon 50% Jadi 199.900)</string>
 
     <string-array name="list_courier">
         <item>POS</item>
