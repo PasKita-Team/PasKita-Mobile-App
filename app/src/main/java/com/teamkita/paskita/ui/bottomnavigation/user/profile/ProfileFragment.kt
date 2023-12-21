@@ -26,6 +26,7 @@ import com.teamkita.paskita.databinding.FragmentProfileBinding
 import com.teamkita.paskita.ui.bottomnavigation.BottomNavigation
 import com.teamkita.paskita.ui.bottomnavigation.penjual.DaftarPenjual
 import com.teamkita.paskita.ui.bottomnavigation.penjual.DashboardPenjual
+import com.teamkita.paskita.ui.bottomnavigation.user.favorite.FavoriteProdukActivity
 import com.teamkita.paskita.ui.bottomnavigation.user.keranjang.KeranjangActivity
 import com.teamkita.paskita.ui.bottomnavigation.user.notifikasi.NotifikasiActivity
 import com.teamkita.paskita.ui.bottomnavigation.user.pesan.DaftarPesanActivity
@@ -113,6 +114,10 @@ class ProfileFragment : Fragment() {
         binding.tvInfoPribadi.setOnClickListener {
             val informasiPribadi = InformasiPribadi.newInstance()
             informasiPribadi.show(requireFragmentManager(), InformasiPribadi.TAG)
+        }
+
+        binding.btnDaftar.setOnClickListener {
+            startActivity(Intent(activity, FavoriteProdukActivity::class.java))
         }
 
         binding.tvBantuan.setOnClickListener {
