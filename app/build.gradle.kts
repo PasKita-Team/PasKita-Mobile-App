@@ -73,6 +73,8 @@ dependencies {
     implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
+    implementation("com.android.volley:volley:1.2.1")
+
     //Lifecycle Extensions
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")

@@ -22,6 +22,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -42,6 +47,7 @@ import com.teamkita.paskita.ui.bottomnavigation.user.adapter.KeranjangProdukAdap
 import com.teamkita.paskita.ui.bottomnavigation.user.keranjang.KeranjangActivity
 import com.teamkita.paskita.ui.bottomnavigation.user.keranjang.KeranjangViewModel
 import me.abhinay.input.CurrencySymbols.INDONESIA
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
@@ -119,6 +125,24 @@ class TambahProduk : AppCompatActivity() {
         }
 
         binding.btnGenerate.setOnClickListener {
+
+            val requestQueue = Volley.newRequestQueue(applicationContext)
+            val url = "https://templatepaskita-7dvq7yjxlq-et.a.run.app/run"
+            val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener<JSONObject> { response ->
+                    if (response.equals("success")){
+                        Toast.makeText(applicationContext, "Generate Berhasil", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(applicationContext, "Generate Gagal", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                Response.ErrorListener { error ->
+                    Toast.makeText(applicationContext, "Generate Berhasil", Toast.LENGTH_SHORT).show()
+                }
+            )
+
+            requestQueue.add(jsonObjectRequest)
+
             nUser?.let { user ->
                 updateDataGenerate(user)
             }
