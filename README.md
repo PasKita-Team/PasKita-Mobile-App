@@ -8,8 +8,14 @@ Clone this repository and import into **Android Studio**
 git clone https://github.com/PasKita-Team/PasKita-Mobile-App.git
 ```
 
-<p>
+<p align="center">
+<img width="240" src="https://github.com/PasKita-Team/PasKita-Mobile-App/blob/main/resources/gif1.gif">
+</p>
 
+## Generate 
+
+<p align="center">
+<img width="240" src="https://github.com/PasKita-Team/PasKita-Mobile-App/blob/main/resources/gif2.gif">
 </p>
 
 ## Developer 👷‍♀
