@@ -8,6 +8,10 @@ Clone this repository and import into **Android Studio**
 git clone https://github.com/PasKita-Team/PasKita-Mobile-App.git
 ```
 
+<p>
+
+</p>
+
 ## Developer 👷‍♀
 This project developed by:
 * [Afwan Sutdrajat](https://github.com/Waans14)
