@@ -189,6 +189,7 @@
     <string name="jika_produk_yang_saya_pasarkan_terbukti_tidak_orisinil_maka_pihak_paskita_berhak_menghapus_produk_saya">Jika produk yang saya pasarkan terbukti tidak orisinil, maka pihak PasKita berhak menghapus produk saya</string>
     <string name="tulis_pesan">Tulis Pesan...</string>
     <string name="pilih_satu">Pilih Satu</string>
+    <string name="no_rek">Nomor Rekening</string>
 
     <string-array name="list_courier">
         <item>POS</item>

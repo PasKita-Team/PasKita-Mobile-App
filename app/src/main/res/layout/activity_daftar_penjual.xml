@@ -311,7 +311,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="start"
-                        android:text="@string/nomor_rekening"
+                        android:text="@string/no_rek"
                         android:fontFamily="@font/dm_sans_bold"
                         android:textStyle="bold"
                         android:textSize="16sp" />
