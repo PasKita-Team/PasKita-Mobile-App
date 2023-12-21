@@ -1,6 +1,6 @@
 ## PasKita-Mobile-App
 
-Click To Watch The Demo [this](https://drive.google.com/file/d/1jSHvNt9DPKioVHX1vsNc9JebKYjqaF-x/view?usp=sharing) to watch the demo
+Click To [Watch The Demo](https://drive.google.com/file/d/1jSHvNt9DPKioVHX1vsNc9JebKYjqaF-x/view?usp=sharing)
 
 ## How to install 🔧
 Clone this repository and import into **Android Studio**
