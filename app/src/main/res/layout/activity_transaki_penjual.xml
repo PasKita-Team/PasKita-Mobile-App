@@ -39,33 +39,6 @@
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/tulisan_pesanan_toko" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="end">
-
-                    <ImageView
-                        android:id="@+id/ivPesan"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:contentDescription="@string/chat"
-                        android:src="@drawable/pesan" />
-
-                    <ImageView
-                        android:id="@+id/ivNotif"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="20dp"
-                        android:contentDescription="@string/chat"
-                        android:src="@drawable/notifikasi" />
-
-                </LinearLayout>
-
             </Toolbar>
 
         </LinearLayout>

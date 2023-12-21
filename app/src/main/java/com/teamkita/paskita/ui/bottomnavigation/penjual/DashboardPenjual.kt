@@ -15,6 +15,8 @@ import com.teamkita.paskita.data.Produk
 import com.teamkita.paskita.databinding.ActivityDashboardPenjualBinding
 import com.teamkita.paskita.ui.bottomnavigation.BottomNavigation
 import com.teamkita.paskita.ui.bottomnavigation.penjual.adapter.ProdukPenjualAdapter
+import com.teamkita.paskita.ui.bottomnavigation.user.notifikasi.NotifikasiActivity
+import com.teamkita.paskita.ui.bottomnavigation.user.pesan.PesanActivity
 
 class DashboardPenjual : AppCompatActivity() {
 
@@ -51,6 +53,16 @@ class DashboardPenjual : AppCompatActivity() {
             val intent = Intent(this, BottomNavigation::class.java)
             startActivity(intent)
             finish()
+        }
+
+        binding.ivPesan.setOnClickListener {
+            val intent = Intent(this, PesanActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.ivNotif.setOnClickListener {
+            val intent = Intent(this, NotifikasiActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnPesanan.setOnClickListener {
