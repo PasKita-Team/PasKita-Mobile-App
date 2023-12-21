@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.bottomnavigation.user.cekproduk.CekProdukFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -64,176 +63,170 @@
 
         </Toolbar>
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:srcCompat="@drawable/search_by_pict" />
+
+            <TextView
+                android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:alpha="0"
+                android:text="@string/cari_produk_dengan_gambar"
+                android:textColor="@color/secondary"
+                android:textSize="16sp"
+                android:fontFamily="@font/dm_sans_bold"
+                android:textStyle="bold"
+                tools:alpha="100" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    app:srcCompat="@drawable/search_by_pict" />
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:alpha="0"
+                android:text="@string/upload_gambar_produk_yang_kamu_cari_dibawah_ini"
+                android:fontFamily="@font/dm_sans"
+                android:textSize="14sp"
+                tools:alpha="100" />
 
-                <TextView
-                    android:id="@+id/titleTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
-                    android:alpha="0"
-                    android:text="@string/cari_produk_dengan_gambar"
-                    android:textColor="@color/secondary"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/dm_sans_bold"
-                    android:textStyle="bold"
-                    tools:alpha="100" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvFotoProduk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
 
-                <TextView
-                    android:id="@+id/tvMessage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:alpha="0"
-                    android:text="@string/upload_gambar_produk_yang_kamu_cari_dibawah_ini"
-                    android:fontFamily="@font/dm_sans"
-                    android:textSize="14sp"
-                    tools:alpha="100" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvFotoProduk"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp">
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/ivProduk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/upload_foto"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/upload_foto"/>
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/upload_foto_cari"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
 
-                        <ImageView
-                            android:id="@+id/ivProduk"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/upload_foto"
-                            android:layout_gravity="center"
-                            android:contentDescription="@string/upload_foto"/>
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:text="@string/upload_foto_cari"
-                            android:fontFamily="@font/dm_sans_bold"
-                            android:textStyle="bold"
-                            android:textSize="14sp" />
+            </androidx.cardview.widget.CardView>
 
-                    </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvHasil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
 
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvHasil"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp">
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_margin="10dp">
+                        android:gravity="start"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/fun_fact_produk_mu"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:textColor="@color/secondary"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/fun_fact_produk_mu"
-                            android:fontFamily="@font/dm_sans_bold"
-                            android:textColor="@color/secondary"
-                            android:textStyle="bold"
-                            android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tvResult"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/nama_produk"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:textColor="@color/secondary"
+                        android:textStyle="bold"
+                        android:textSize="18sp" />
 
-                        <TextView
-                            android:id="@+id/tvResult"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/nama_produk"
-                            android:fontFamily="@font/dm_sans_bold"
-                            android:textColor="@color/secondary"
-                            android:textStyle="bold"
-                            android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/tvFunFact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/fun_fact_produk_mu"
+                        android:fontFamily="@font/dm_sans_bold"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
 
-                        <TextView
-                            android:id="@+id/tvFunFact"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/fun_fact_produk_mu"
-                            android:fontFamily="@font/dm_sans_bold"
-                            android:textStyle="bold"
-                            android:textSize="14sp" />
+                </LinearLayout>
 
-                    </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tvProdukSerupa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:alpha="100"
+                android:text="@string/toko_yang_menyediakan_produk_yang_kamu_cari"
+                android:textColor="@color/secondary"
+                android:textSize="16sp"
+                android:fontFamily="@font/dm_sans_bold"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvProdukSerupa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="32dp"
-                    android:alpha="100"
-                    android:text="@string/toko_yang_menyediakan_produk_yang_kamu_cari"
-                    android:textColor="@color/secondary"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/dm_sans_bold"
-                    android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProduk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="50dp"
+                tools:listitem="@layout/list_item_produk"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvProduk"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="30dp"
-                    tools:listitem="@layout/list_item_produk"/>
-
-            </LinearLayout>
-
-        </ScrollView>
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

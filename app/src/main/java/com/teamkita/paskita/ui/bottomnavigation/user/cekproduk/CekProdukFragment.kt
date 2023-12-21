@@ -24,6 +24,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -93,8 +95,8 @@ class CekProdukFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.rvProduk.layoutManager = LinearLayoutManager(requireContext())
         listProduk = arrayListOf()
-
         cekPermission()
 
         setupAction()
@@ -139,12 +141,13 @@ class CekProdukFragment : Fragment() {
                         for (data in snapshot.documents) {
                             val produk: Produk? = data.toObject(Produk::class.java)
                             val namaProduk = produk?.nama_produk
-                            // Check if the product matches the search query and category
+                            
                             if (!namaProduk.isNullOrBlank() && query.isNotEmpty() &&
-                                namaProduk.contains(query, ignoreCase = true)
+                                namaProduk!!.contains(query, ignoreCase = true)
                             ) {
-                                produk.let { listProduk.add(it) }
+                                produk?.let { listProduk.add(it) }
                                 binding.tvProdukSerupa.visibility = View.VISIBLE
+                                binding.rvProduk.visibility = View.VISIBLE
                             }
                         }
                         binding.rvProduk.adapter = ProdukAdapter(listProduk)
@@ -254,7 +257,8 @@ class CekProdukFragment : Fragment() {
             binding.tvResult.text = classes[maxPos]
             binding.tvFunFact.text = desc[maxPos]
 
-            searchProduk(classes[maxPos])
+            val query = binding.tvResult.text.toString()
+            searchProduk(query)
 
             model.close()
         } catch (e: IOException) {
