@@ -133,6 +133,29 @@ class Ulasan : BottomSheetDialogFragment() {
                 Log.w("GetUserData", "Gagal mengambil data: ", e)
             }
 
+        val penjualDocument = transaksi?.uid_penjual?.let { db.collection("penjual").document(it) }
+        penjualDocument?.get()
+            ?.addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val userData = documentSnapshot.data
+                    val terjual = userData?.get("terjual") as String
+                    val updateTerjual = terjual.toInt() + 1
+
+                    val updates = hashMapOf(
+                        "terjual" to updateTerjual.toString(),
+                    )
+                    userDocument?.update(updates as Map<String, Any>)
+                        ?.addOnSuccessListener {
+                            println("update berhasil")
+                        }?.addOnFailureListener { exception ->
+                            println("Error getting documents: $exception")
+                        }
+
+                }
+            }
+            ?.addOnFailureListener { e ->
+                Log.w("GetUserData", "Gagal mengambil data: ", e)
+            }
     }
 
     override fun onDismiss(dialog: DialogInterface) {
