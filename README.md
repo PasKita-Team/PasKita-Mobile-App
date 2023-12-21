@@ -1,7 +1,6 @@
 # PasKita-Mobile-App
 link design : https://www.figma.com/file/NjzpdezBiHSDca0HsfaXgG/PasKita-Capstone-Project?type=design&node-id=0%3A1&mode=design&t=im5GjRsnXuhGkQAW-1
 
-# PasKita-Mobile-App
 dependencies{
     implementation("com.google.android.gms:play-services-base:18.2.0")
     implementation("com.google.firebase:firebase-auth:22.3.0")
