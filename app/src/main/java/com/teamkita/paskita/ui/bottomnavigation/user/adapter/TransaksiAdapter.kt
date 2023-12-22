@@ -46,6 +46,44 @@ class TransaksiAdapter : ListAdapter<Transaksi, TransaksiAdapter.MyViewHolder>(
             val nUser = FirebaseAuth.getInstance().currentUser
             val db = FirebaseFirestore.getInstance()
 
+            binding.tvTanggal.text = transaksi.tanggal
+            binding.tvProses.text = transaksi.status
+            binding.tvNamaProduk.text = transaksi.namaProduk
+            "${transaksi.jumlahProduk} Barang".also { binding.tvJumlah.text = it }
+            binding.tvTotalBelanja.text = transaksi.totalBayar
+
+            Glide.with(itemView)
+                .load(transaksi.url_foto_produk)
+                .into(binding.ivImage)
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailTransaksiActivity::class.java)
+                intent.putExtra("transaksi", transaksi)
+
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        itemView.context as Activity,
+                        Pair(binding.ivImage, "image"),
+                        Pair(binding.tvNamaProduk, "nama_produk"),
+                        Pair(binding.tvTotalBelanja, "harga"),
+                    )
+                itemView.context.startActivity(intent, optionsCompat.toBundle())
+            }
+
+            binding.btnTanyaPenjual.setOnClickListener {
+                val intent = Intent(itemView.context, PesanActivity::class.java)
+                intent.putExtra("nama_toko", transaksi.namaToko)
+                intent.putExtra("uid_penjual", transaksi.uid_penjual)
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        itemView.context as Activity,
+                        Pair(binding.ivImage, "image"),
+                        Pair(binding.tvNamaProduk, "nama_produk"),
+                        Pair(binding.tvTotalBelanja, "harga"),
+                    )
+                itemView.context.startActivity(intent, optionsCompat.toBundle())
+            }
+
             val userDocument = nUser?.let { db.collection("penjual").document(it.uid) }
             userDocument?.get()
                 ?.addOnSuccessListener { documentSnapshot ->
@@ -55,45 +93,11 @@ class TransaksiAdapter : ListAdapter<Transaksi, TransaksiAdapter.MyViewHolder>(
 
                         if (namaToko == transaksi.namaToko){
                             binding.btnTanyaPenjual.visibility = View.GONE
+                        }else{
+                            binding.btnTanyaPenjual.visibility = View.VISIBLE
                         }
 
-                        binding.tvTanggal.text = transaksi.tanggal
-                        binding.tvProses.text = transaksi.status
-                        binding.tvNamaProduk.text = transaksi.namaProduk
-                        "${transaksi.jumlahProduk} Barang".also { binding.tvJumlah.text = it }
-                        binding.tvTotalBelanja.text = transaksi.totalBayar
 
-                        Glide.with(itemView)
-                            .load(transaksi.url_foto_produk)
-                            .into(binding.ivImage)
-
-                        itemView.setOnClickListener {
-                            val intent = Intent(itemView.context, DetailTransaksiActivity::class.java)
-                            intent.putExtra("transaksi", transaksi)
-
-                            val optionsCompat: ActivityOptionsCompat =
-                                ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                    itemView.context as Activity,
-                                    Pair(binding.ivImage, "image"),
-                                    Pair(binding.tvNamaProduk, "nama_produk"),
-                                    Pair(binding.tvTotalBelanja, "harga"),
-                                )
-                            itemView.context.startActivity(intent, optionsCompat.toBundle())
-                        }
-
-                        binding.btnTanyaPenjual.setOnClickListener {
-                            val intent = Intent(itemView.context, PesanActivity::class.java)
-                            intent.putExtra("nama_toko", transaksi.namaToko)
-                            intent.putExtra("uid_penjual", transaksi.uid_penjual)
-                            val optionsCompat: ActivityOptionsCompat =
-                                ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                    itemView.context as Activity,
-                                    Pair(binding.ivImage, "image"),
-                                    Pair(binding.tvNamaProduk, "nama_produk"),
-                                    Pair(binding.tvTotalBelanja, "harga"),
-                                )
-                            itemView.context.startActivity(intent, optionsCompat.toBundle())
-                        }
                     }
                 }
                 ?.addOnFailureListener { e ->
