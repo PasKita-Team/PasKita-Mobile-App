@@ -23,6 +23,13 @@ git clone https://github.com/PasKita-Team/PasKita-Mobile-App.git
 
 ## Generate 
 
+"Paskita" is really cool! It can really help SMEs to promote themselves easily. There are many benefits, for example, 
+you can save costs, create good promotional content without having to bother paying expensive designers. The platform is 
+also user-friendly, so everyone can use it without any problems. And not only do they provide templates, but there are also 
+tutorials to improve the design and marketing skills of SMEs. You can also share your experiences with other SMEs, so it feels 
+more like a community. So, "Paskita" is not only making SMEs more powerful, but also supporting economic growth at large. Great, right?
+
+
 <p align="center">
 <img width="240" src="https://github.com/PasKita-Team/PasKita-Mobile-App/blob/main/resources/gif2.gif">
 </p>
